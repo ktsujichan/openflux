@@ -1,0 +1,10 @@
+# Required by pnpm < 10.5 (Workers Builds); this is a single-package repo
+packages:
+  - "."
+saveExact: true
+allowBuilds:
+  esbuild: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - "@cloudflare/workers-types@5.20261009.1"
+  - vite@8.3.4

@@ -1,0 +1,32 @@
+// Wrangler config used by `pnpm run deploy` and the Deploy to Cloudflare button.
+// Mirrors cloudflare.config.ts, which `cf` uses; keep the two in sync.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "openflux",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  // JPEG XL encoding and filters are CPU-intensive, so raise the limit (requires the Workers Paid plan)
+  "limits": { "cpu_ms": 30000 },
+  "observability": { "enabled": true },
+  // Domain used for image delivery (the Cache API does not work on workers.dev)
+  // "routes": [{ "pattern": "img.example.com", "custom_domain": true }],
+  "images": { "binding": "IMAGES" },
+  // To use R2 as the origin, bind the bucket and put its name in source.binding of OPENFLUX_CONFIG
+  // "r2_buckets": [{ "binding": "IMAGES_BUCKET", "bucket_name": "my-images" }],
+  // Signing secrets, S3 keys and the cache API token are secrets: set them with `wrangler secret put <NAME>`
+  "vars": {
+    "OPENFLUX_CONFIG": {
+      // To enable the cache API (with purge, the Purge API removes entries from all data centers)
+      // "api": { "hosts": ["api.img.example.com"], "tokenEnv": "OPENFLUX_API_TOKEN", "purge": { "zoneId": "<ZONE_ID>", "apiTokenEnv": "CF_PURGE_TOKEN" } },
+      "origins": [
+        {
+          "hosts": ["*"],
+          // Sample images from Lorem Picsum, e.g. /w=400/id/10/1200/800. Replace with your own origin
+          "description": "sample (Lorem Picsum)",
+          "source": { "kind": "http", "scheme": "https", "host": "picsum.photos", "pathPrefix": "/" },
+          "defaultCacheSeconds": 600,
+        },
+      ],
+    },
+  },
+}

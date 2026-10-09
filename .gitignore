@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output / local dev state
+.cloudflare/
+.wrangler/
+dist/
+coverage/
+
+# Secrets
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+secrets.json
+secrets.*.json
+
+# Local tool overrides
+mise.local.toml
+
+# Logs
+*.log
+
+# OS
+.DS_Store

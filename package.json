@@ -1,0 +1,41 @@
+{
+  "name": "openflux",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cf dev",
+    "dev:remote": "cf dev --mode remote",
+    "build:cf": "cf build",
+    "deploy": "wrangler deploy",
+    "deploy:cf": "cf deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "sign": "node scripts/sign.mjs",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@jsquash/jxl": "1.3.0",
+    "@jsquash/png": "3.1.1",
+    "aws4fetch": "1.0.20",
+    "hono": "4.13.13",
+    "neverthrow": "8.2.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "2.0.0-beta.sha-52b0dc0e9",
+    "@cloudflare/workers-types": "5.20261009.1",
+    "@standard-schema/spec": "1.1.0",
+    "cf": "1.0.0-beta.13",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
+    "oxlint-tsgolint": "7.0.2003",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.3",
+    "wrangler": "4.149.0"
+  }
+}
